@@ -1,0 +1,90 @@
+# HeroShot High Quality Configuration
+# This configuration prioritizes quality over speed
+
+# Input settings
+input:
+  source: ""
+  source_type: "auto"
+
+# Output settings
+output:
+  base_directory: "outputs"
+  create_subdirectory: true
+  preserve_original_segments: true
+
+# Scene detection settings
+scene_detection:
+  enabled: true
+  threshold: 20.0  # Lower threshold for more sensitive detection
+  min_scene_length: 0.5
+  detector_type: "content"
+
+# Hero shot extraction settings
+hero_shot:
+  enabled: true
+  scoring_method: "combined"
+  sharpness_weight: 0.5
+  variance_weight: 0.3
+  contrast_weight: 0.2
+  sample_interval: 0.2  # Sample more frames
+  max_frames_to_analyze: 50  # Analyze more frames per scene
+  
+  caption_generation:
+    enabled: true
+    model: "Salesforce/blip-image-captioning-large"  # Larger model
+    max_length: 100
+
+# Style transformation settings
+style_transformation:
+  enabled: true
+  
+  flux:
+    model_path: "black-forest-labs/FLUX.1-dev"
+    device: "auto"
+    precision: "fp16"
+    
+  presets:
+    cinematic_hq:
+      prompt_suffix: "cinematic, dramatic lighting, film grain, professional photography, ultra detailed, 8k resolution"
+      negative_prompt: "cartoon, anime, sketch, low quality, blurry, noisy"
+      guidance_scale: 9.0
+      num_inference_steps: 50
+      
+    artistic_hq:
+      prompt_suffix: "masterpiece, fine art, oil painting, detailed brushstrokes, museum quality, classical style"
+      negative_prompt: "digital, photographic, modern, low quality, amateur"
+      guidance_scale: 8.5
+      num_inference_steps: 40
+      
+  generation:
+    style_preset: "cinematic_hq"
+    multiple_variations: false
+    variations_per_image: 1
+
+# Video reconstruction settings
+video_reconstruction:
+  enabled: true
+  frame_duration: 0.3
+  fps: 60  # High frame rate
+  resolution:
+    width: 3840  # 4K resolution
+    height: 2160
+  codec: "libx264"
+  quality: "high"
+  
+  transitions:
+    enabled: true
+    type: "fade"
+    duration: 0.2
+
+# Performance settings
+performance:
+  show_progress_bars: true
+  parallel_processing: true
+  max_workers: 4
+  gpu_memory_fraction: 0.9
+
+# Logging
+logging:
+  level: "INFO"
+  verbose: true

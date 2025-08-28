@@ -1,0 +1,77 @@
+# HeroShot Example Configuration - Quick Preview Mode
+# This configuration is optimized for fast processing and previews
+
+# Input settings
+input:
+  source: ""
+  source_type: "auto"
+
+# Output settings
+output:
+  base_directory: "outputs"
+  create_subdirectory: true
+  preserve_original_segments: false  # Skip saving segments for faster processing
+
+# Scene detection settings
+scene_detection:
+  enabled: true
+  threshold: 40.0  # Higher threshold for fewer scenes
+  min_scene_length: 2.0  # Longer minimum scene length
+  detector_type: "content"
+
+# Hero shot extraction settings
+hero_shot:
+  enabled: true
+  scoring_method: "sharpness"  # Faster single-metric scoring
+  sample_interval: 1.0  # Sample fewer frames
+  max_frames_to_analyze: 10  # Analyze fewer frames per scene
+  
+  caption_generation:
+    enabled: false  # Disable captions for speed
+
+# Style transformation settings
+style_transformation:
+  enabled: true
+  
+  flux:
+    model_path: "black-forest-labs/FLUX.1-schnell"  # Faster model variant
+    device: "auto"
+    precision: "fp16"
+    
+  presets:
+    quick:
+      prompt_suffix: "high quality, sharp, detailed"
+      negative_prompt: "blurry, low quality"
+      guidance_scale: 5.0  # Lower guidance for speed
+      num_inference_steps: 10  # Fewer steps for speed
+      
+  generation:
+    style_preset: "quick"
+    multiple_variations: false
+    variations_per_image: 1
+
+# Video reconstruction settings
+video_reconstruction:
+  enabled: true
+  frame_duration: 0.5  # Longer duration per frame
+  fps: 24  # Lower fps
+  resolution:
+    width: 1280  # Lower resolution
+    height: 720
+  codec: "libx264"
+  quality: "medium"
+  
+  transitions:
+    enabled: false  # Disable transitions for speed
+
+# Performance settings
+performance:
+  show_progress_bars: true
+  parallel_processing: true
+  max_workers: 2
+  gpu_memory_fraction: 0.6
+
+# Logging
+logging:
+  level: "INFO"
+  verbose: false

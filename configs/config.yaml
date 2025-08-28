@@ -1,0 +1,110 @@
+# HeroShot Configuration File
+# This file contains all configurable parameters for the HeroShot pipeline
+
+# Input settings
+input:
+  source: ""  # YouTube URL or local file path (set via CLI or config)
+  source_type: "auto"  # "youtube", "local", or "auto" for auto-detection
+
+# Output settings
+output:
+  base_directory: "outputs"
+  create_subdirectory: true  # Create subdirectory named after video
+  preserve_original_segments: true
+
+# Scene detection settings
+scene_detection:
+  enabled: true
+  threshold: 30.0  # Scene change threshold (0-100)
+  min_scene_length: 1.0  # Minimum scene length in seconds
+  detector_type: "content"  # "content", "threshold", or "adaptive"
+
+# Hero shot extraction settings
+hero_shot:
+  enabled: true
+  scoring_method: "combined"  # "sharpness", "variance", "combined"
+  sharpness_weight: 0.4
+  variance_weight: 0.3
+  contrast_weight: 0.3
+  sample_interval: 0.5  # Seconds between frame samples
+  max_frames_to_analyze: 30  # Max frames to analyze per scene
+  
+  # Vision-language model for captions
+  caption_generation:
+    enabled: true
+    model: "Salesforce/blip-image-captioning-base"
+    max_length: 50
+
+# Style transformation settings
+style_transformation:
+  enabled: true
+  
+  # Flux model settings
+  flux:
+    model_path: "black-forest-labs/FLUX.1-dev"
+    device: "auto"  # "auto", "cuda", "cpu"
+    precision: "fp16"  # "fp32", "fp16", "bf16"
+    
+  # LoRA settings
+  lora:
+    enabled: false
+    weights_path: ""
+    scale: 1.0
+    
+  # Style presets
+  presets:
+    cinematic:
+      prompt_suffix: "cinematic, dramatic lighting, film grain, professional photography"
+      negative_prompt: "cartoon, anime, sketch, low quality"
+      guidance_scale: 7.5
+      num_inference_steps: 30
+      
+    cartoon:
+      prompt_suffix: "cartoon style, animated, colorful, stylized"
+      negative_prompt: "realistic, photographic, dark, gritty"
+      guidance_scale: 8.0
+      num_inference_steps: 25
+      
+    oil_painting:
+      prompt_suffix: "oil painting, classical art, textured brushstrokes, renaissance style"
+      negative_prompt: "digital, photographic, modern"
+      guidance_scale: 7.0
+      num_inference_steps: 35
+      
+  # Generation settings
+  generation:
+    style_preset: "cinematic"  # Default style preset
+    random_style_selection: false
+    multiple_variations: false
+    variations_per_image: 1
+    seed: null  # null for random, or set specific seed
+
+# Video reconstruction settings
+video_reconstruction:
+  enabled: true
+  frame_duration: 0.3  # Seconds per image
+  fps: 30
+  resolution:
+    width: 1920
+    height: 1080
+  codec: "libx264"
+  quality: "high"  # "low", "medium", "high"
+  
+  # Transition effects
+  transitions:
+    enabled: true
+    type: "fade"  # "fade", "crossfade", "none"
+    duration: 0.1  # Transition duration in seconds
+
+# Logging settings
+logging:
+  level: "INFO"  # "DEBUG", "INFO", "WARNING", "ERROR"
+  verbose: false
+  log_file: null  # null for no file, or specify path
+  
+# Progress and performance settings
+performance:
+  show_progress_bars: true
+  parallel_processing: true
+  max_workers: 4  # Number of parallel workers
+  gpu_memory_fraction: 0.8  # Fraction of GPU memory to use

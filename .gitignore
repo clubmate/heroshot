@@ -205,3 +205,23 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# HeroShot specific
+outputs/
+*.mp4
+*.avi
+*.mkv
+*.mov
+*.wmv
+*.flv
+*.webm
+*.m4v
+temp_audio.m4a
+
+# Model cache
+.cache/
+models/
+
+# Temporary files
+tmp/
+temp/
