@@ -8,8 +8,12 @@ from pathlib import Path
 from typing import Optional, Tuple, Dict, Any
 from tqdm import tqdm
 
-from .utils import is_youtube_url, extract_youtube_id, sanitize_filename, get_video_info
-from .config import get_config
+try:
+    from .utils import is_youtube_url, extract_youtube_id, sanitize_filename, get_video_info
+    from .config import get_config
+except ImportError:
+    from utils import is_youtube_url, extract_youtube_id, sanitize_filename, get_video_info
+    from config import get_config
 
 logger = logging.getLogger(__name__)
 

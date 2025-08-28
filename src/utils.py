@@ -319,3 +319,19 @@ def get_optimal_device() -> str:
             
     except ImportError:
         return "cpu"
+
+
+def detect_source_type(source: str) -> str:
+    """
+    Detect source type (YouTube or local file)
+    
+    Args:
+        source: Source string (URL or file path)
+        
+    Returns:
+        Source type: 'youtube' or 'local'
+    """
+    if is_youtube_url(source):
+        return 'youtube'
+    else:
+        return 'local'

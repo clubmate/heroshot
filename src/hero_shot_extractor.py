@@ -10,9 +10,14 @@ from typing import List, Dict, Any, Optional, Tuple
 import numpy as np
 from dataclasses import dataclass
 
-from .config import get_config
-from .scene_detector import Scene
-from .utils import sanitize_filename
+try:
+    from .config import get_config
+    from .scene_detector import Scene
+    from .utils import sanitize_filename
+except ImportError:
+    from config import get_config
+    from scene_detector import Scene
+    from utils import sanitize_filename
 
 logger = logging.getLogger(__name__)
 

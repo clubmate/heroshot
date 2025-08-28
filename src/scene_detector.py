@@ -9,8 +9,12 @@ from pathlib import Path
 from typing import List, Dict, Any, Tuple, Optional
 from dataclasses import dataclass
 
-from .config import get_config
-from .utils import format_duration, sanitize_filename
+try:
+    from .config import get_config
+    from .utils import format_duration, sanitize_filename
+except ImportError:
+    from config import get_config
+    from utils import format_duration, sanitize_filename
 
 logger = logging.getLogger(__name__)
 
