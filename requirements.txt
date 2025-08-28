@@ -1,0 +1,25 @@
+# Core dependencies
+yt-dlp>=2023.12.30
+scenedetect>=0.6.3
+opencv-python>=4.8.0
+Pillow>=10.0.0
+moviepy>=1.0.3
+PyYAML>=6.0.1
+tqdm>=4.66.0
+numpy>=1.24.0
+
+# AI/ML dependencies for hero shot extraction and style transformation
+torch>=2.0.0
+torchvision>=0.15.0
+transformers>=4.35.0
+diffusers>=0.24.0
+accelerate>=0.24.0
+
+# Optional dependencies for advanced features
+ffmpeg-python>=0.2.0
+scikit-image>=0.21.0
+
+# Development dependencies
+pytest>=7.4.0
+black>=23.0.0
+flake8>=6.0.0
